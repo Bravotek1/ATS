@@ -10,12 +10,17 @@ on:
       - "**/*.py"
   workflow_dispatch:
 
-# ★ 關鍵：要能 push 到 gh-pages 需要 contents: write
 permissions:
-  contents: write
+  contents: read        # 讀取原始碼即可
+  pages: write          # ★ 必要：寫入 Pages
+  id-token: write       # ★ 必要：OIDC 簽章
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -29,12 +34,21 @@ jobs:
           python -m pip install --upgrade pip
           pip install mkdocs mkdocs-material "mkdocstrings[python]"
 
-      - name: Build
+      - name: Build site
         run: mkdocs build --strict
 
-      - name: Deploy to GitHub Pages (push to gh-pages)
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: ./site
+          path: ./site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
