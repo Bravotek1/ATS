@@ -33,6 +33,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install mkdocs mkdocs-material "mkdocstrings[python]"
+          pip install mkdocs mkdocs-material mkdocs-include-markdown-plugin "mkdocstrings[python]"
 
       - name: Build site
         run: mkdocs build --strict
