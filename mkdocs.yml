@@ -20,7 +20,7 @@ plugins:
   - mkdocstrings:
       handlers:
         python:
-          paths: ["."]
+          paths: ["backend"]
 markdown_extensions:
   - admonition
   - toc:

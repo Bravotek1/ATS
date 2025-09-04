@@ -2,12 +2,47 @@
 
 以下內容由 **mkdocstrings** 自動從原始碼擷取。
 
-> 預設假設你的套件名稱為 `ats`；若不同，請修改下方模組名稱。
-
-## 主要模組
-::: ats
+## backend（套件根）
+::: backend
     options:
       show_root_heading: true
       show_source: true
+
+## 常用子模組
+::: backend.core
+    options:
       members_order: source
-      docstring_style: google
+      show_source: true
+
+::: backend.utils
+    options:
+      members_order: source
+      show_source: true
+
+::: backend.instruments
+    options:
+      members_order: source
+      show_source: true
+
+::: backend.main
+    options:
+      members_order: source
+      show_source: true
+
+::: backend.runners
+    options:
+      members_order: source
+      show_source: true
+
+::: backend.report
+    options:
+      members_order: source
+      show_source: true
+
+::: backend.excel_writer
+    options:
+      members_order: source
+      show_source: true
+
+
+# 依需要繼續加…
