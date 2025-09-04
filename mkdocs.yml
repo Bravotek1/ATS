@@ -11,6 +11,18 @@ theme:
 nav:
   - 首頁: index.md
   - 快速開始: quickstart.md
+<<<<<<< HEAD
+=======
+  - API 文件: api.md
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          setup_commands:
+            - import sys, os
+            - sys.path.append(os.path.abspath("."))  # 讓 mkdocstrings 找得到你的套件
+>>>>>>> V0.0
 markdown_extensions:
   - admonition
   - toc:
