@@ -9,6 +9,10 @@ except Exception:
 import os, time
 
 def open_with_retry(path: Path, mode="a", encoding="utf-8", newline="\n", retries=20, delay=0.05):
+	"""
+	寫入progress.json有retry機制 20 run x 0.05 delay, 
+	避免檔案被 GUI讀時無法存取
+	"""
     last = None
     for i in range(retries):
         try:
@@ -20,6 +24,12 @@ def open_with_retry(path: Path, mode="a", encoding="utf-8", newline="\n", retrie
 
 
 class Progress:
+	"""
+	__init__ () : 初始化 progress.json
+	update () : 更新 progress.json
+	event () : 更新events.ndjson
+	"""
+	
     def __init__(self, out_dir: Path, events_filename="events.ndjson"):
         self.out=out_dir; self.progress=out_dir/"progress.json"; self.events=out_dir/events_filename
         self.out.mkdir(parents=True, exist_ok=True)

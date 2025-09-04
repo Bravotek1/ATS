@@ -7,6 +7,43 @@ from instruments.dmm6500 import DMM6500
 from report.excel_writer import write_efficiency_report
 
 def run_efficiency(plan, out_dir: Path, prog):
+	"""
+	效率量測流程 :
+	vin = Keithley2450(ins["keithley2450_1"]).as_voltage_source(curr_limit=lim["current_limit"])
+    ch1 = Keithley2450(ins["keithley2450_2"]).as_current_sink(volt_limit=lim["voltage_limit_ch1"])
+    x23 = Keithley2450(ins["keithley2450_3"]).as_current_sink(volt_limit=lim["voltage_limit_x23"])
+    dmm2= DMM6500(ins["dmm6500_1"]).as_dcv()
+    dmm3= DMM6500(ins["dmm6500_2"]).as_dcv()
+    
+    由plan.yaml 字典格式取得start, stop, step參數轉成 list
+    計算total progress :
+    total=max(1,len(vin_list)*len(i1_list)*len(i23_list));
+    
+    主流程 :
+    
+        for v in vin_list:
+            vin.set_voltage(v)
+            for i1 in i1_list:
+                time.sleep(.1)
+                ch1.set_sink_current(-i1)
+                for i23 in i23_list:
+                    time.sleep(.1)
+                    x23.set_sink_current(-i23)
+                    time.sleep(.1)
+                    iin=vin.meas_current(); v1=ch1.meas_voltage(); v2=dmm2.meas_voltage(); v3=dmm3.meas_voltage(); v23=x23.meas_voltage()
+                    p_in=v*iin; p_ch1=v1*i1; p_x=i23*(v2-v3); eta   = 0.0 if p_in <= 1e-9 else (p_ch1 + p_x) / p_in
+                    eta = max(0.0, min(1.2, eta))
+                    rows.append(dict(vin=v,i_ch1=i1,i23=i23,iin=iin,v1=v1,v2=v2,v3=v3,v23=v23, p_in=p_in,p_ch1=p_ch1,p_x=p_x,p_out=p_ch1+p_x,efficiency=eta))
+
+                    step+=1; prog.update(state="running", percent=int(step/total*100), current={"vin":v,"i_ch1":i1,"i23":i23}, message=f"VIN={v} I1={i1} I23={i23}")
+                    if plan["modes"] == "run" :
+                        prog.event({"type":"kpi","name":"efficiency","vin":v,"i_ch1":i1,"i23":i23,"value":eta})    
+    
+    結束 : 關閉儀器
+    	        vin.off(); ch1.off(); x23.off(); dmm2.close(); dmm3.close()
+    	        raw資料寫入excel
+    
+	"""	
     ins=plan["instruments"]; lim=plan["limits"]; sw=plan["sweep"]; outp=plan["outputs"]
 
     vin = Keithley2450(ins["keithley2450_1"]).as_voltage_source(curr_limit=lim["current_limit"])

@@ -21,6 +21,24 @@ plugins:
       handlers:
         python:
           paths: ["."]
+          options:
+            # 顯示行為
+            show_source: true
+            show_root_heading: true
+            show_root_full_path: true
+            show_root_toc_entry: true
+            separate_signature: true
+            show_signature_annotations: true
+            merge_init_into_class: true
+            members_order: source
+
+            # ⬇️ 這幾個是關鍵：把原本被濾掉的也顯示出來
+            inherited_members: true
+            show_private_members: true
+            show_submodules: true
+            filters: []           # 取消 "!^_" 的預設過濾
+            docstring_style: google
+
 markdown_extensions:
   - admonition
   - toc:
