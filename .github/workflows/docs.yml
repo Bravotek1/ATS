@@ -10,6 +10,10 @@ on:
       - "**/*.py"
   workflow_dispatch:
 
+# ★ 關鍵：要能 push 到 gh-pages 需要 contents: write
+permissions:
+  contents: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -28,8 +32,9 @@ jobs:
       - name: Build
         run: mkdocs build --strict
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages (push to gh-pages)
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
           publish_dir: ./site
