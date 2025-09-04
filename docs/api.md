@@ -9,7 +9,7 @@
       show_source: true
 
 ## 常用子模組
-::: backend.core
+::: backend.main
     options:
       members_order: source
       show_source: true
@@ -24,22 +24,12 @@
       members_order: source
       show_source: true
 
-::: backend.main
-    options:
-      members_order: source
-      show_source: true
-
 ::: backend.runners
     options:
       members_order: source
       show_source: true
 
 ::: backend.report
-    options:
-      members_order: source
-      show_source: true
-
-::: backend.excel_writer
     options:
       members_order: source
       show_source: true
