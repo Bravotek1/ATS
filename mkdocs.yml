@@ -1,4 +1,3 @@
-@"
 site_name: ATS 說明文件
 site_url: https://bravotek1.github.io/ATS/
 repo_url: https://github.com/Bravotek1/ATS
@@ -30,4 +29,4 @@ markdown_extensions:
   - toc:
       permalink: true
   - tables
-"@ | Set-Content -Encoding utf8 mkdocs.yml
+
