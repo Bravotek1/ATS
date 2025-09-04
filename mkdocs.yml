@@ -20,13 +20,9 @@ plugins:
   - mkdocstrings:
       handlers:
         python:
-          setup_commands:
-            - import sys, os
-            - sys.path.append(os.path.abspath("."))
-
+          paths: ["."]
 markdown_extensions:
   - admonition
   - toc:
       permalink: true
   - tables
-
