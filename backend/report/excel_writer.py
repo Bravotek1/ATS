@@ -3,10 +3,10 @@ import openpyxl
 from openpyxl.chart import LineChart, Reference
 
 def write_efficiency_report(df, xlsx_path):
-	"""
-	將效率資料寫入xlsx檔
-	並建立chart : Efficiency vs Vin (by loads)
-	"""	
+    """
+    將效率資料寫入xlsx檔  
+    並建立chart : Efficiency vs Vin (by loads)  
+    """	
 	
     wb=openpyxl.Workbook(); ws=wb.active; ws.title="Data"
     ws.append(list(df.columns))

@@ -14,13 +14,16 @@ nav:
   - 首頁: index.md
   - 快速開始: quickstart.md
   - API 文件: api.md
+  - Plan 文件: plan.md
+  - Event 文件: events.md
+  - Progress 文件: progress.md
 
 plugins:
   - search
   - mkdocstrings:
       handlers:
         python:
-          paths: ["."]
+          paths: ["C:\\Project\\ATE\\ATS"]
           options:
             show_source: true
             show_root_heading: true
@@ -35,9 +38,13 @@ plugins:
             # 關鍵：先不要過濾成員，底線開頭也顯示
             filters: []
             docstring_style: google
+  - include-markdown
 
 markdown_extensions:
   - admonition
   - toc:
       permalink: true
   - tables
+  #- codehilite:
+      #guess_lang: false
+      #linenums: true

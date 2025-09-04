@@ -2,14 +2,15 @@
 import pyvisa
 
 class DMM6500:
-	"""
-	DMM6500儀器設定
-	__init() : pyvisa -> rm.open_resource
-	as_dcv() : 量測電壓設定
-	meas_voltage() : 量測電壓命令及讀值
-	close() : close儀器
-	"""
+    """
+    DMM6500儀器設定  
+    
+    __init() : pyvisa -> rm.open_resource  
+    as_dcv() : 量測電壓設定  
+    meas_voltage() : 量測電壓命令及讀值  
+    close() : close儀器  
 	
+	"""
     def __init__(self, resource):
         self.rm = pyvisa.ResourceManager()
         self.dev = self.rm.open_resource(resource, timeout=8000)

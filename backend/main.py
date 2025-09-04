@@ -11,9 +11,9 @@ from utils.progress import Progress
 import os
 
 def sanity_check_writable(out: Path):
-	"""
-	確認檔案可以寫入
-	"""
+    """
+    確認檔案可以寫入
+    """
     out.mkdir(parents=True, exist_ok=True)
     probe = out / "_probe.txt"
     try:
@@ -24,9 +24,9 @@ def sanity_check_writable(out: Path):
         raise RuntimeError(f"Run folder not writable: {out} ({e})")
     
 def load_plan(path: str):
-	"""
-	load plan.yaml設定檔
-	"""
+    """
+    load plan.yaml設定檔
+    """
     p = Path(path)
     s = p.read_text(encoding="utf-8")
     if p.suffix.lower() in (".yaml",".yml") and yaml:
@@ -34,9 +34,9 @@ def load_plan(path: str):
     return json.loads(s)
 
 def main():
-	"""
-	主程式
-	"""
+    """
+    主程式
+    """
     ap = argparse.ArgumentParser()
     ap.add_argument("--plan", required=True)
     ap.add_argument("--out", required=True)

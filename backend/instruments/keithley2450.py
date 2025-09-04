@@ -2,17 +2,18 @@
 import pyvisa
 
 class Keithley2450:
-	"""
-	Keithley2450儀器設定
-	__init() : pyvisa -> rm.open_resource
-	as_voltage_source() : 當電壓源設定
-	as_current_sink() : 當電流sink設定
-	set_voltage() : 設定電壓
-	set_sink_current() : 設定sink電流
-	meas_current() : 量測電流命令及讀值
-	meas_voltage() : 量測電壓命令及讀值
-	close() : close儀器
-	"""
+    """
+    Keithley2450儀器設定  
+    
+    __init() : pyvisa -> rm.open_resource  
+    as_voltage_source() : 當電壓源設定  
+    as_current_sink() : 當電流sink設定  
+    set_voltage() : 設定電壓  
+    set_sink_current() : 設定sink電流  
+    meas_current() : 量測電流命令及讀值  
+    meas_voltage() : 量測電壓命令及讀值  
+    close() : close儀器  
+    """
 	
     def __init__(self, resource):
         self.rm = pyvisa.ResourceManager()
