@@ -1,0 +1,27 @@
+site_name: ATS 說明文件
+site_url: https://bravotek1.github.io/ATS/
+repo_url: https://github.com/Bravotek1/ATS
+theme:
+  name: material
+  language: zh
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - content.code.copy
+nav:
+  - 首頁: index.md
+  - 快速開始: quickstart.md
+  - API 文件: api.md
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          setup_commands:
+            - import sys, os
+            - sys.path.append(os.path.abspath("."))  # 讓 mkdocstrings 找得到你的套件
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+  - tables
